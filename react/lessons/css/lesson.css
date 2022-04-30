@@ -1,0 +1,127 @@
+.bi-chevron-compact-down {
+    font-size: 25px;
+}
+
+.bi-chevron-double-right {
+    font-size: 15px;
+}
+
+.bi-exclamation-triangle-fill {
+    font-size: 25px;
+    color: rgb(218, 58, 58);
+}
+
+.bi-hourglass-split {
+    margin-right: 5px;
+    color: rgb(231, 142, 74);
+}
+
+.bi-pencil-fill {
+    margin-right: 20px;
+    color: #f0ad4e;
+}
+
+.bi-trash3-fill {
+    margin-right: 20px;
+    color: #e06965;
+}
+
+.btn-no {
+    height: 30px;
+    color: white;
+    background-color: rgb(112, 160, 176);
+    margin-left: 10px;
+    opacity: 0.6;
+    transition: 0.3s;
+}
+
+.btn-no:hover {
+    opacity: 1;
+    color: white;
+}
+
+.btn-p {
+    margin-top: -3px;
+}
+
+.btn-yes {
+    height: 30px;
+    color: white;
+    background-color: rgb(218, 58, 58);
+    opacity: 0.6;
+    transition: 0.3s;
+}
+
+.btn-yes:hover {
+    opacity: 1;
+    color: white;
+}
+
+.edit-title {
+    text-shadow: 2px 2px 4px #c4c5d0;
+}
+
+.lesson-badge {
+    margin-top: 5px;
+}
+
+.lesson-card {
+    border-radius: 30px;
+    width: 25vw;
+    height: 35vw;
+    box-shadow: 10px 10px 5px rgb(112, 160, 176);
+    margin-right: 30px;
+    justify-content: center;
+    box-shadow: '0 0 35px 0 rgb(154 161 171 / 15%';
+    background-color: '#fff';
+    margin-top: 10px;
+}
+
+.lesson-card:hover {
+    transform: scale(1.03);
+}
+
+.lesson-img {
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    float: none;
+    max-width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.lessons-header {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 20px;
+    text-shadow: 2px 2px 4px #c4c5d0;
+}
+
+.new-lesson {
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 20px;
+    font-size: 16px;
+    color: #727cf5;
+    text-shadow: 2px 2px 4px #c4c5d0;
+}
+
+.page-data {
+    margin-top: 10px;
+}
+
+.pag-item {
+    box-shadow: 2px 2px 4px #c4c5d0;
+}
+
+.toast-display {
+    border-radius: 30px;
+    font-size: 12px;
+    position: middle-center;
+    background-color: orange;
+    opacity: 95%;
+}
+
+.toast-h {
+    color: white;
+}

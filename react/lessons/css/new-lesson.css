@@ -1,0 +1,113 @@
+.bi-arrow-left {
+    margin-right: 5px;
+    color: rgb(231, 142, 74);
+}
+
+.caption-info {
+    margin-top: 50px;
+    font-size: 14px;
+}
+
+.cap-three {
+    margin-top: 5px;
+}
+
+.car-head {
+    text-align: center;
+    margin-top: -50px;
+    margin-bottom: 30px;
+}
+
+.dropzone-form {
+    margin-bottom: 20px;
+}
+
+.header-three {
+    text-align: center;
+    margin-top: -5px;
+    margin-bottom: 15px;
+}
+
+.car-p {
+    text-align: center;
+}
+
+.checkbox {
+    margin-bottom: 10px;
+}
+
+.checkbox-label {
+    text-shadow: 2px 2px 4px #cbccd5;
+}
+
+.err-message {
+    color: rgb(222, 78, 78);
+    text-shadow: 2px 2px 4px #cbccd5;
+}
+
+.form-new {
+    margin-bottom: 25px;
+}
+
+.form-new label {
+    color: rgb(138, 137, 137);
+    text-shadow: 2px 2px 4px #cbccd5;
+}
+
+.lessons-back {
+    float: right;
+    display: inline-block;
+    width: 30%;
+    margin-top: 8px;
+    border-bottom: 2px;
+    font-size: 16px;
+    color: #727cf5;
+    text-shadow: 2px 2px 4px #c4c5d0;
+}
+
+.car-img {
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    float: none;
+    max-width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+#changeImage {
+    margin-left: 15px;
+}
+
+.new-header {
+    display: inline-block;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px #c4c5d0;
+}
+
+.car-card {
+    right: -30%;
+    border-radius: 30px;
+    width: 25vw;
+    height: 35vw;
+    box-shadow: 10px 10px 5px rgb(112, 160, 176);
+    justify-content: center;
+    box-shadow: '0 0 35px 0 rgb(154 161 171 / 15%';
+    background-color: '#fff';
+    margin-top: 30px;
+}
+
+.new-submit {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow: 2px 2px 4px #c4c5d0;
+}
+
+.upload-form {
+    margin-bottom: 20px;
+}
+
+.upload-label {
+    color: rgb(138, 137, 137);
+    text-shadow: 2px 2px 4px #cbccd5;
+}

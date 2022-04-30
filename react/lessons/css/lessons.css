@@ -1,0 +1,75 @@
+.bi-house-fill {
+    margin-right: 5px;
+    color: rgb(231, 142, 74);
+}
+
+.bi-journal-bookmark-fill {
+    margin-right: 5px;
+    color: rgb(231, 142, 74);
+}
+
+.bi-plus {
+    color: #f0ad4e;
+}
+
+.bi-search::before {
+    font-size: 15px;
+    display: inline-block;
+    margin-left: 5px;
+    color: #f0ad4e;
+}
+
+.lessons-container {
+    margin-top: 10px;
+}
+
+.lessons-header {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 20px;
+    text-shadow: 2px 2px 4px #c4c5d0;
+}
+
+.lessons-btn {
+    float: right;
+    background-color: white;
+    display: inline-block;
+    margin-top: 1px;
+    margin-right: 20px;
+    font-size: 16px;
+    color: #727cf5;
+    text-shadow: 2px 2px 4px #c4c5d0;
+}
+
+.new-lesson {
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 20px;
+    font-size: 16px;
+    color: #727cf5;
+    text-shadow: 2px 2px 4px #c4c5d0;
+}
+
+.page-data {
+    margin-top: 10px;
+}
+
+.pag-item {
+    box-shadow: 2px 2px 4px #c4c5d0;
+}
+
+.search-bar {
+    height: 20px;
+    width: 150px;
+}
+
+.search-container {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.search-icon-container {
+    margin-top: -1px;
+    margin-left: 3px;
+    color: rgb(231, 142, 74);
+}

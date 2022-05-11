@@ -18,7 +18,7 @@
     margin-bottom: 30px;
 }
 
-.dropzone-form {
+.drop {
     margin-bottom: 20px;
 }
 
@@ -30,14 +30,6 @@
 
 .car-p {
     text-align: center;
-}
-
-.checkbox {
-    margin-bottom: 10px;
-}
-
-.checkbox-label {
-    text-shadow: 2px 2px 4px #cbccd5;
 }
 
 .err-message {

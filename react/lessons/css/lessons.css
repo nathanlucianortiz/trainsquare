@@ -1,3 +1,11 @@
+.add-lesson {
+    text-align: center;
+    background-color: white;
+    font-size: 20px;
+    color: #727cf5;
+    text-shadow: 2px 2px 4px #c4c5d0;
+}
+
 .bi-house-fill {
     margin-right: 5px;
     color: rgb(231, 142, 74);
@@ -17,6 +25,16 @@
     display: inline-block;
     margin-left: 5px;
     color: #f0ad4e;
+}
+
+.components-container {
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 50px;
+}
+
+.container-img {
+    height: 400px;
 }
 
 .lessons-container {
@@ -42,9 +60,11 @@
 }
 
 .new-lesson {
+    float: right;
+    background-color: white;
     display: inline-block;
-    margin-top: 10px;
-    margin-left: 20px;
+    margin-top: 1px;
+    margin-right: 20px;
     font-size: 16px;
     color: #727cf5;
     text-shadow: 2px 2px 4px #c4c5d0;

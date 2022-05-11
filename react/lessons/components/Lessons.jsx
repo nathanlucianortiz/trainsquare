@@ -1,21 +1,20 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Pagination } from 'react-bootstrap';
+import NavCard from '../host/NavCard';
+import PropTypes from 'prop-types';
 import * as service from '../../services/lessonService';
 import * as names from './durationEnum';
 import Lesson from './Lesson';
 import toastr from '../../utils/toastr.js';
 import './css/lessons.css';
-import debug from 'sabio-debug';
 
-const _logger = debug.extend('Lessons');
-
-function Lessons() {
+function Lessons(props) {
+    const currentUser = props.currentUser;
     const [pageData, setPageData] = useState({
         lessons: [],
         lessonsComponents: [],
         isShown: false,
-        isCurrent: false,
         current: 1,
         index: 0,
         size: 6,
@@ -27,22 +26,22 @@ function Lessons() {
     });
 
     useEffect(() => {
-        if (!pageData.isCurrent) {
+        currentUser.roles.includes('User') &&
             setHeader((prevState) => {
                 return { ...prevState, header: 'All Lessons' };
             });
-            if (pageData.searchInput) {
-                getBySearch(pageData.searchInput);
-            } else {
-                get(pageData);
-            }
-        } else {
+
+        !currentUser.roles.includes('User') &&
             setHeader((prevState) => {
                 return { ...prevState, header: 'My Lessons' };
             });
-            getByCreatedBy(pageData);
-        }
-    }, [pageData.isCurrent, pageData.current, pageData.searchInput]);
+
+        currentUser.roles.includes('User') && get(pageData);
+
+        !currentUser.roles.includes('User') && getByCreatedBy(pageData);
+
+        pageData.searchInput.length > 0 && getBySearch(pageData.searchInput);
+    }, [pageData.current, pageData.searchInput, currentUser]);
 
     const get = (currentPage) => {
         service.get(currentPage.index, currentPage.size).then(onGetSuccess).catch(onGetError);
@@ -80,12 +79,11 @@ function Lessons() {
     };
 
     const mapLesson = (lesson) => {
-        _logger('lesson to be mapped', lesson);
         return (
             <Lesson
+                currentUser={currentUser}
                 lesson={lesson}
                 key={lesson.id}
-                isCurrent={pageData.isCurrent}
                 onDeleteClicked={onRemoveRequested}
                 onUpdateSubmit={onUpdateRequested}
             />
@@ -115,8 +113,7 @@ function Lessons() {
         });
     };
 
-    const onRemoveRequested = useCallback((currentLesson, eObj) => {
-        _logger(currentLesson.id, eObj);
+    const onRemoveRequested = useCallback((currentLesson) => {
         const handler = getSuccessHandler(currentLesson);
         service.remove(currentLesson.id).then(handler).catch(onRemoveError);
     }, []);
@@ -124,7 +121,8 @@ function Lessons() {
     const getSuccessHandler = (currentLesson) => {
         return () => {
             setPageData((prevState) => {
-                const pd = { ...prevState, isCurrent: true };
+                const pd = { ...prevState };
+                pd.isCurrent = true;
                 const lessons = pd.lessons;
                 const idxOf = lessons.findIndex((lesson) => lesson.id === currentLesson.id);
 
@@ -159,8 +157,8 @@ function Lessons() {
         setPageData((prevState) => ({ ...prevState, isCurrent: option, index: 0, current: 1 }));
     };
 
-    const onGetError = (err) => {
-        toastr.error(err);
+    const onGetError = () => {
+        toastr.info('No lessons yet. Click the link to get started.');
     };
 
     const onUpdateError = (err) => {
@@ -177,9 +175,10 @@ function Lessons() {
                 rel="stylesheet"
                 href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"></link>
             <div className="container-fluid lessons-container">
+                {!currentUser.roles.includes('User') && <NavCard />}
                 <h4 className="lessons-header">{header.header}</h4>
 
-                {!pageData.isCurrent && (
+                {currentUser.roles.includes('User') && (
                     <div className="search-container">
                         <div className="input-group">
                             <div className="form-outline search-outline">
@@ -197,26 +196,32 @@ function Lessons() {
                     </div>
                 )}
 
-                {!pageData.isCurrent ? (
-                    <button className="btn lessons-btn" onClick={() => getCurrent(true)}>
-                        <i className="bi bi-journal-bookmark-fill"></i>
-                        To My Lessons
-                    </button>
+                {!currentUser.roles.includes('User') ? (
+                    <Link className="new-lesson" to="/lessons/new">
+                        <i className="bi bi-plus"></i>
+                        New
+                    </Link>
                 ) : (
                     <>
                         <button className="btn lessons-btn" onClick={() => getCurrent(false)}>
                             <i className="bi bi-house-fill"></i>
-                            To All Lessons
+                            Saved Lessons
                         </button>
-                        <Link className="new-lesson" to="/lessons/new">
-                            <i className="bi bi-plus"></i>
-                            New
-                        </Link>
                     </>
                 )}
 
                 <div className="row page-data">
-                    {pageData.lessonsComponents}
+                    {pageData.lessonsComponents.length === 0 ? (
+                        <div className="components-container">
+                            <div className="add-lesson">
+                                <Link to="/lessons/new">Add your lesson here!</Link>
+                            </div>
+
+                            <img src="https://bit.ly/3Fw0CGY" alt="" className="container-img" />
+                        </div>
+                    ) : (
+                        pageData.lessonsComponents
+                    )}
 
                     <Pagination>
                         <Pagination.Prev onClick={onPrevClick} />
@@ -228,4 +233,13 @@ function Lessons() {
         </React.Fragment>
     );
 }
+Lessons.propTypes = {
+    currentUser: PropTypes.shape({
+        email: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
+        isLoggedIn: PropTypes.bool.isRequired,
+        roles: PropTypes.arrayOf(PropTypes.string).isRequired,
+        profilePic: PropTypes.string,
+    }),
+};
 export default Lessons;

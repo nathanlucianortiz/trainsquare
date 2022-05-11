@@ -13,12 +13,12 @@ function Lesson(props) {
     const aLesson = props.lesson;
     let durationName = parseInt(aLesson.type.name) / 60;
 
-    const [show, setShow] = useState(false);
-    const [showA, setShowA] = useState(false);
-    const toggleShowA = () => setShowA(!showA);
+    const [showModal, setShowModal] = useState(false);
+    const [showToast, setShowToast] = useState(false);
+    const toggleShowToast = () => setShowToast(!showToast);
 
     const onHide = () => {
-        setShow(false);
+        setShowModal(false);
     };
 
     const onLocalDeleteClicked = () => {
@@ -58,7 +58,7 @@ function Lesson(props) {
                 )}
 
                 <Card.Body className={aLesson.imageUrl ? 'position-relative' : ''}>
-                    {props.isCurrent && (
+                    {!props.currentUser.roles.includes('User') && (
                         <Dropdown className="card-widgets" align="end">
                             <Dropdown.Toggle
                                 variant="link"
@@ -70,34 +70,39 @@ function Lesson(props) {
                             <Dropdown.Menu className="dropdown-menu-animated">
                                 <Dropdown.Item
                                     onClick={() => {
-                                        setShow(true);
+                                        setShowModal(true);
                                     }}>
                                     <i className="bi bi-pencil-fill"></i>
                                     Edit
                                 </Dropdown.Item>
-                                <Dropdown.Item onClick={toggleShowA}>
+                                <Dropdown.Item onClick={toggleShowToast}>
                                     <i className="bi bi-trash3-fill"></i>Delete
                                 </Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                     )}
 
-                    <Modal size="lg" show={show} onHide={onHide} aria-labelledby="example-modal-sizes-title-lg">
-                        <Modal.Header closeButton>
-                            <Modal.Title id="modal-title-lg" className="edit-title">
-                                Edit Lesson
-                            </Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <LessonForm
-                                onHide={onHide}
-                                onUpdateSubmit={props.onUpdateSubmit}
-                                isCurrent={props.isCurrent}
-                                formData={props.lesson}
-                                lessonId={props.lesson.id}
-                            />
-                        </Modal.Body>
-                    </Modal>
+                    {!props.currentUser.roles.includes('User') && (
+                        <Modal
+                            size="lg"
+                            show={showModal}
+                            onHide={onHide}
+                            aria-labelledby="example-modal-sizes-title-lg">
+                            <Modal.Header closeButton>
+                                <Modal.Title id="modal-title-lg" className="edit-title">
+                                    Edit Lesson
+                                </Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <LessonForm
+                                    onHide={onHide}
+                                    onUpdateSubmit={props.onUpdateSubmit}
+                                    formData={props.lesson}
+                                    lessonId={props.lesson.id}
+                                />
+                            </Modal.Body>
+                        </Modal>
+                    )}
 
                     {aLesson.title.length > 20 ? (
                         <h4 className="mt-0">{`${aLesson.title.substring(0, 15)}...`}</h4>
@@ -117,7 +122,7 @@ function Lesson(props) {
                     </p>
                 </Card.Body>
                 <ToastContainer position="middle-end">
-                    <Toast show={showA} className="toast-display">
+                    <Toast show={showToast} className="toast-display">
                         <Toast.Body>
                             <i className="bi bi-exclamation-triangle-fill"></i>
                             <h6 className="toast-h">
@@ -127,7 +132,7 @@ function Lesson(props) {
                             <button className="btn btn-yes" onClick={onLocalDeleteClicked}>
                                 <p className="btn-p">Trash it.</p>
                             </button>
-                            <button className="btn btn-no" onClick={toggleShowA}>
+                            <button className="btn btn-no" onClick={toggleShowToast}>
                                 <p className="btn-p">No, keep it.</p>
                             </button>
                         </Toast.Body>
@@ -151,7 +156,13 @@ Lesson.propTypes = {
         createdBy: PropTypes.number,
         modifiedBy: PropTypes.number,
     }),
-    isCurrent: PropTypes.bool,
+    currentUser: PropTypes.shape({
+        email: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
+        isLoggedIn: PropTypes.bool.isRequired,
+        roles: PropTypes.arrayOf(PropTypes.string).isRequired,
+        profilePic: PropTypes.string,
+    }),
     onDeleteClicked: PropTypes.func.isRequired,
     onUpdateSubmit: PropTypes.func.isRequired,
 };

@@ -2,18 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Dropzone from '../files/Dropzone';
 import lookup from '../../services/lookupService';
-import basicSchema from '../../schema/lessonSchema';
+import lessonSchema from '../../schema/lessonSchema';
 import * as service from '../../services/lessonService';
 import PropTypes from 'prop-types';
 import toastr from '../../utils/toastr.js';
 import './css/new-lesson.css';
-import debug from 'sabio-debug';
-
-const _logger = debug.extend('LessonForm');
 
 function LessonForm(props) {
     const modalFormData = props.formData;
-    const checkBox = document.querySelector('#changeImage');
     const [mappedDurations, setDurations] = useState([]);
 
     const [newFormState, setNewFormState] = useState({
@@ -29,14 +25,22 @@ function LessonForm(props) {
         isUpdateForm: false,
     });
 
-    const findLocation = (fileData) => {
-        if (checkBox.checked) {
-            setFileFormData(fileData);
-        }
+    const setImgFormData = (fileData) => {
+        let imageFile = fileData[0].url;
+
+        setNewFormState((prevState) => {
+            const fs = { ...prevState };
+            fs.formData.imageUrl = imageFile;
+            return fs;
+        });
     };
 
-    const getUploadReturn = (fileData) => {
-        findLocation(fileData);
+    const getUploadImgReturn = (fileData) => {
+        setImgFormData(fileData);
+    };
+
+    const getUploadFileReturn = (fileData) => {
+        setFileFormData(fileData);
     };
 
     const setFileFormData = (fileData) => {
@@ -44,7 +48,6 @@ function LessonForm(props) {
 
         setNewFormState((prevState) => {
             const fs = { ...prevState };
-            fs.formData.imageUrl = newFile;
             fs.formData.fileUrl = newFile;
             return fs;
         });
@@ -57,15 +60,17 @@ function LessonForm(props) {
 
     const mapADuration = (item, index) => (
         <option value={item.id} key={`${item}_${index}`}>
-            {item.name}
+            {parseInt(item.name) / 60}
+            {' hours '}
         </option>
     );
-    const onLookupError = () => {};
+    const onLookupError = (err) => {
+        toastr.error(err);
+    };
 
     useEffect(() => {
         lookup(['LessonDuration']).then(onLookupSuccess).catch(onLookupError);
         if (modalFormData) {
-            _logger(modalFormData);
             setNewFormState((prevState) => {
                 return {
                     ...prevState,
@@ -103,6 +108,12 @@ function LessonForm(props) {
 
     const onCreateSuccess = (response) => {
         toastr.success(`${response.title} added!`);
+        setNewFormState((prevState) => {
+            const fs = { ...prevState };
+            fs.formData.imageUrl = '';
+            fs.formData.fileUrl = '';
+            return fs;
+        });
     };
     const onCreateError = (err) => {
         toastr.error(err);
@@ -111,20 +122,14 @@ function LessonForm(props) {
     return (
         <React.Fragment>
             <div className="file-upload-container">
-                <div className="row">
-                    <form>
-                        <div className="checkbox">
-                            <label className="checkbox-label" htmlFor="changeImage">
-                                Upload lesson image
-                            </label>
-                            <input type="checkbox" id="changeImage" />
-                        </div>
-                    </form>
-
-                    <label className="upload-label">Upload File</label>
-
-                    <div className="row dropzone-form">
-                        <Dropzone uploadedFiles={getUploadReturn} />
+                <div className="dropzone-form">
+                    <div className="drop img-drop">
+                        <label className="upload-label">Upload Lesson Image</label>
+                        <Dropzone uploadedFiles={getUploadImgReturn} />
+                    </div>
+                    <div className="drop file-drop">
+                        <label className="upload-label">Upload Misc File</label>
+                        <Dropzone uploadedFiles={getUploadFileReturn} />
                     </div>
                 </div>
             </div>
@@ -132,7 +137,7 @@ function LessonForm(props) {
                 enableReinitialize={true}
                 initialValues={newFormState.formData}
                 onSubmit={handleSubmit}
-                validationSchema={basicSchema}>
+                validationSchema={lessonSchema}>
                 <Form>
                     <div className="form-group form-new">
                         <label htmlFor="title">Title</label>
@@ -150,7 +155,7 @@ function LessonForm(props) {
                         <ErrorMessage name="description" component="div" className="err-message" />
                     </div>
                     <div className="form-group form-new">
-                        <label htmlFor="duration">Time Duration</label>
+                        <label htmlFor="durationTypeId">Time Duration</label>
                         <Field as="select" name="durationTypeId" className="form-control">
                             <option>Select a duration</option>
                             {mappedDurations}

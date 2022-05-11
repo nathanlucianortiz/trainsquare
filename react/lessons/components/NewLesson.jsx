@@ -31,7 +31,7 @@ function NewLesson() {
                 href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"></link>
             <div className="container-fluid">
                 <h4 className="new-header">New Lesson</h4>
-                <Link className="btn lessons-back" to="/lessons/creator">
+                <Link className="btn lessons-back" to="/lessons">
                     <i className="bi bi-arrow-left"></i>
                     Back to My Lessons
                 </Link>

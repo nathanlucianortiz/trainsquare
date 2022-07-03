@@ -9,20 +9,20 @@
 
 <br/><br/>
 
-![Delete Lesson Prompt](host-2.png)
+![Delete Lesson Prompt](./img/host-2.png)
 
 <br/><br/>
 
-![Edit Lesson Form Modal View](host-3.png)
+![Edit Lesson Form Modal View](./img/host-3.png)
 
 <br/><br/>
 
-![New Lesson Page](host-4.png)
+![New Lesson Page](./img/host-4.png)
 
 <br/><br/>
 
-![User Lessons Page](user-1.png)
+![User Lessons Page](./img/user-1.png)
 
 <br/><br/>
 
-![Lesson Description Modal View](user-2.png)
+![Lesson Description Modal View](./img/user-2.png)

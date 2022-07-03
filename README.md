@@ -4,12 +4,22 @@
 
 ![Host Lessons Page](host-1.png)
 
+<br/><br/>
+
 ![Delete Lesson Prompt](host-2.png)
+
+<br/><br/>
 
 ![Edit Lesson Form Modal View](host-3.png)
 
+<br/><br/>
+
 ![New Lesson Page](host-4.png)
 
+<br/><br/>
+
 ![User Lessons Page](user-1.png)
+
+<br/><br/>
 
 ![Lesson Description Modal View](host-2.png)

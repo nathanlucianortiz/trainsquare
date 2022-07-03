@@ -1,6 +1,6 @@
 # Trainsquare
-## Trainsquare is a consumer educational and skills platform based on community-sharing knowledge, which allows users to host their own in-person workshops and discover and book courses, lessons and activities.
-### This repo contains sql, .net, and react code pertaining to the lessons feature I was responsible for. 
+## Trainsquare is a social networking platform that allows users to host their own in-person workshops, as well as discover and book courses, lessons and activities within their communities.
+### This repo contains sql, .net, and react code pertaining to the lessons feature I was personally responsible for designing and building. 
 
 <br/><br/>
 

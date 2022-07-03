@@ -22,4 +22,4 @@
 
 <br/><br/>
 
-![Lesson Description Modal View](host-2.png)
+![Lesson Description Modal View](user-2.png)

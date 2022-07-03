@@ -3,7 +3,7 @@
 <br/>
 <p>This repo contains sql, .net, and react code pertaining to the lessons feature I was personally responsible for designing and building.</p>
 
-<br/><br/>
+***
 
 ![Host Lessons Page](./img/host-1.png)
 

@@ -5,7 +5,7 @@
 
 <br/><br/>
 
-![Host Lessons Page](host-1.png)
+![Host Lessons Page](./img/host-1.png)
 
 <br/><br/>
 
